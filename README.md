@@ -1,4 +1,4 @@
-<h1 align="center">Hi 👋, I'm Jagat Pradhan</h1>
+<h1 align="center">Hi :smile: , I'm Jagat Pradhan</h1>
 <h3 align="center">A Passionate DevSecOps and Cloud Security Enthusiast..</h3>
 
 - 🔭 I’m currently working on **Cloud Security and DevSecOps**
