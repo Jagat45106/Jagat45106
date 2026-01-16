@@ -1,0 +1,684 @@
+/**
+ * Hero Section Module CSS
+ * 
+ * Features:
+ * - Full viewport height hero section
+ * - Animated gradient background
+ * - Staggered text animations
+ * - Floating decorative elements
+ * - Responsive design
+ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-24) var(--space-4) var(--space-16);
+  overflow: hidden;
+}
+
+/* Animated Gradient Background */
+.gradientBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-primary) 0%,
+    var(--color-bg-secondary) 50%,
+    var(--color-bg-tertiary) 100%
+  );
+  z-index: -2;
+  transition: background var(--transition-slow);
+}
+
+/* Add subtle animated gradient overlay */
+.gradientBg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    var(--glow-primary) 0%,
+    transparent 50%
+  );
+  opacity: 0.3;
+  animation: gradientMove 15s ease-in-out infinite;
+}
+
+/* Dark mode: enhanced glow effect in background */
+[data-theme="dark"] .gradientBg::before {
+  opacity: 0.15;
+}
+
+[data-theme="dark"] .gradientBg::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    var(--glow-secondary) 0%,
+    transparent 70%
+  );
+  opacity: 0.1;
+  animation: gradientMove 20s ease-in-out infinite reverse;
+}
+
+@keyframes gradientMove {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5%, 5%);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.content {
+  max-width: 700px;
+}
+
+/**
+ * Professional Tag
+ * Animated fade-in with slight bounce
+ */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 153, 51, 0.1) 0%,
+    rgba(19, 136, 8, 0.1) 100%
+  );
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-primary);
+  margin-bottom: var(--space-6);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.1s forwards;
+}
+
+.tagIcon {
+  font-size: var(--font-size-base);
+  filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.6));
+  animation: tagGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes tagGlow {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.6));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(37, 99, 235, 0.7));
+  }
+}
+
+/**
+ * Main Heading
+ * Staggered animation with gradient text highlight
+ */
+.heading {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+  color: var(--color-text-primary);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.2s forwards;
+}
+
+/* Gradient text for emphasis with GLOW effect */
+.gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-accent) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Multi-layer glow effect */
+  filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6))
+          drop-shadow(0 0 20px rgba(37, 99, 235, 0.4))
+          drop-shadow(0 0 40px rgba(34, 197, 94, 0.3));
+  animation: nameGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes nameGlow {
+  0% {
+    filter: drop-shadow(0 0 8px var(--glow-primary))
+            drop-shadow(0 0 20px var(--glow-primary))
+            drop-shadow(0 0 40px var(--glow-secondary));
+  }
+  100% {
+    filter: drop-shadow(0 0 12px var(--glow-primary))
+            drop-shadow(0 0 30px var(--glow-secondary))
+            drop-shadow(0 0 50px var(--glow-accent));
+  }
+}
+
+/* Enhanced glow for dark mode */
+[data-theme="dark"] .gradient {
+  filter: drop-shadow(0 0 15px var(--glow-primary))
+          drop-shadow(0 0 30px var(--glow-secondary))
+          drop-shadow(0 0 60px var(--glow-primary));
+}
+
+/**
+ * Contact Bar
+ * Email and phone displayed prominently below name
+ */
+.contactBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.25s forwards;
+}
+
+.contactItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-sm);
+}
+
+.contactItem:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Dark mode contact items with glow */
+[data-theme="dark"] .contactItem {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .contactItem:hover {
+  box-shadow: var(--shadow-glow-sm);
+}
+
+.contactIcon {
+  font-size: var(--font-size-base);
+  filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.5));
+  transition: filter var(--transition-normal);
+}
+
+.contactItem:hover .contactIcon {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+/**
+ * Description
+ * Fade in with delay
+ */
+.description {
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.3s forwards;
+}
+
+/**
+ * Call-to-Action Buttons
+ * Hover effects with scale and shadow
+ */
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-10);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.4s forwards;
+}
+
+.btnPrimary,
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.btnPrimary {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
+  color: var(--color-white);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btnSecondary {
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border);
+}
+
+.btnSecondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Dark mode button glow effects */
+[data-theme="dark"] .btnPrimary {
+  box-shadow: 0 4px 14px var(--glow-primary);
+}
+
+[data-theme="dark"] .btnPrimary:hover {
+  box-shadow: 0 6px 25px var(--glow-primary), 0 0 40px var(--glow-secondary);
+}
+
+[data-theme="dark"] .btnSecondary:hover {
+  box-shadow: var(--shadow-glow-sm);
+}
+
+.btnIcon {
+  font-size: var(--font-size-lg);
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
+  transition: filter var(--transition-normal);
+}
+
+.btnPrimary:hover .btnIcon {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.btnSecondary:hover .btnIcon {
+  filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+}
+
+/**
+ * Stats Section
+ * Three-column layout with animation
+ */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out 0.5s forwards;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNumber {
+  display: block;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+  text-shadow: 
+    0 0 10px rgba(37, 99, 235, 0.4),
+    0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+.statLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/**
+ * Decorative Floating Icons
+ * Positioned absolutely with float animations
+ */
+.decorative {
+  display: none;
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+@media (min-width: 1024px) {
+  .decorative {
+    display: block;
+  }
+}
+
+.iconFloat {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 20px rgba(37, 99, 235, 0.3),
+    0 0 40px rgba(37, 99, 235, 0.15);
+  animation: float 6s ease-in-out infinite, iconGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes iconGlow {
+  0% {
+    box-shadow: 
+      var(--shadow-lg),
+      0 0 15px var(--glow-primary),
+      0 0 30px var(--glow-secondary);
+  }
+  100% {
+    box-shadow: 
+      var(--shadow-lg),
+      0 0 25px var(--glow-secondary),
+      0 0 50px var(--glow-primary);
+  }
+}
+
+/* Dark mode floating icons - enhanced glow */
+[data-theme="dark"] .iconFloat {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 
+    var(--shadow-lg),
+    0 0 25px var(--glow-primary),
+    0 0 50px var(--glow-secondary);
+}
+
+.iconFloat:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0s;
+}
+
+.iconFloat:nth-child(2) {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  animation-delay: 1s;
+}
+
+.iconFloat:nth-child(3) {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 2s;
+}
+
+.iconFloat:nth-child(4) {
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  animation-delay: 3s;
+}
+
+.securityIcon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.5));
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.5));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.7));
+    transform: scale(1.05);
+  }
+}
+
+/* Float animation keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Reset transform for positioned icons */
+.iconFloat:nth-child(1) {
+  animation: float1 6s ease-in-out infinite;
+}
+
+.iconFloat:nth-child(2) {
+  animation: float2 6s ease-in-out infinite 1s;
+}
+
+.iconFloat:nth-child(3) {
+  animation: float3 6s ease-in-out infinite 2s;
+}
+
+.iconFloat:nth-child(4) {
+  animation: float4 6s ease-in-out infinite 3s;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-15px); }
+}
+
+@keyframes float2 {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(-10px); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(15px); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translateY(-50%) translateX(0); }
+  50% { transform: translateY(-50%) translateX(10px); }
+}
+
+/**
+ * Scroll Indicator
+ * Animated mouse scroll icon
+ */
+.scrollIndicator {
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out 1s forwards;
+}
+
+.scrollMouse {
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--color-text-muted);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scrollWheel {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: var(--color-text-muted);
+  border-radius: var(--radius-full);
+  animation: scrollDown 2s ease-in-out infinite;
+}
+
+/* Dark mode scroll indicator glow */
+[data-theme="dark"] .scrollMouse {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 10px var(--glow-primary);
+}
+
+[data-theme="dark"] .scrollWheel {
+  background: var(--color-primary);
+}
+
+@keyframes scrollDown {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+.scrollText {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Fade In Up Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-20) var(--space-4) var(--space-12);
+  }
+
+  .heading {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .description {
+    font-size: var(--font-size-base);
+  }
+
+  .contactBar {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contactItem {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .cta {
+    flex-direction: column;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stats {
+    justify-content: space-around;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .tag,
+  .heading,
+  .description,
+  .contactBar,
+  .cta,
+  .stats,
+  .iconFloat,
+  .scrollIndicator,
+  .scrollWheel,
+  .gradientBg::before,
+  .gradient,
+  .tagIcon,
+  .securityIcon {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .gradient {
+    filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.4));
+  }
+  
+  .iconFloat {
+    box-shadow: var(--shadow-lg), 0 0 15px rgba(37, 99, 235, 0.2);
+  }
+}

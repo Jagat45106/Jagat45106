@@ -1,0 +1,189 @@
+/**
+ * AnimatedBubbles Module CSS
+ * 
+ * Styles for the decorative tri-colour bubble background
+ * 
+ * Design Philosophy:
+ * - Subtle, non-distracting background decoration
+ * - Low opacity (0.15-0.25) keeps focus on content
+ * - Blur effect creates depth and softness
+ * - Z-index placement ensures bubbles stay behind content
+ */
+
+/* Container for all bubbles - spans full viewport */
+.bubblesContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Behind all content */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+/**
+ * Individual Bubble Styles
+ * 
+ * Each bubble is a circular element with:
+ * - Gradient background for depth
+ * - Blur filter for soft appearance
+ * - Float animation for gentle movement
+ */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.15;
+  animation-name: bubbleFloat;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform; /* Optimize for animation performance */
+}
+
+/**
+ * Indian Tri-colour Bubble Variants
+ * 
+ * Saffron (#ff9933): Top band of Indian flag - courage and sacrifice
+ * White (#ffffff): Middle band - peace and truth
+ * Green (#138808): Bottom band - faith and fertility
+ */
+
+/* Saffron/Orange bubble */
+.saffron {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 153, 51, 0.4),
+    rgba(255, 153, 51, 0.1)
+  );
+  box-shadow: 0 0 20px rgba(255, 153, 51, 0.2);
+}
+
+/* White bubble - uses light gray for visibility on white background */
+.white {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(200, 200, 200, 0.5),
+    rgba(220, 220, 220, 0.15)
+  );
+  box-shadow: 0 0 20px rgba(200, 200, 200, 0.25);
+  opacity: 0.2; /* Slightly more visible since it's subtle */
+}
+
+/* Green bubble */
+.green {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(19, 136, 8, 0.4),
+    rgba(19, 136, 8, 0.1)
+  );
+  box-shadow: 0 0 20px rgba(19, 136, 8, 0.2);
+}
+
+/**
+ * Dark Mode Bubble Enhancements
+ * More vibrant and glowing bubbles for dark theme
+ */
+[data-theme="dark"] .bubble {
+  opacity: 0.25;
+  filter: blur(3px);
+}
+
+[data-theme="dark"] .saffron {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 153, 51, 0.5),
+    rgba(255, 153, 51, 0.15)
+  );
+  box-shadow: 0 0 40px rgba(255, 153, 51, 0.4),
+              0 0 80px rgba(255, 153, 51, 0.2);
+}
+
+[data-theme="dark"] .white {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(88, 166, 255, 0.4),
+    rgba(88, 166, 255, 0.1)
+  );
+  box-shadow: 0 0 40px rgba(88, 166, 255, 0.3),
+              0 0 80px rgba(88, 166, 255, 0.15);
+  opacity: 0.3;
+}
+
+[data-theme="dark"] .green {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(63, 185, 80, 0.5),
+    rgba(63, 185, 80, 0.15)
+  );
+  box-shadow: 0 0 40px rgba(63, 185, 80, 0.4),
+              0 0 80px rgba(63, 185, 80, 0.2);
+}
+
+/**
+ * Bubble Float Animation
+ * 
+ * Creates gentle floating movement:
+ * - Vertical translation of 20px
+ * - Slight rotation for organic feel
+ * - Smooth ease-in-out timing
+ * - Duration varies per bubble (set inline)
+ */
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-25px) translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(3px) rotate(1deg);
+  }
+}
+
+/**
+ * Hover Enhancement (Optional)
+ * When users interact near bubbles, subtle scale increase
+ * Note: pointer-events: none prevents direct interaction
+ */
+
+/**
+ * Reduced Motion Support
+ * Respects user preference for reduced motion
+ * Bubbles become static but still visible
+ */
+@media (prefers-reduced-motion: reduce) {
+  .bubble {
+    animation: none;
+  }
+}
+
+/**
+ * Performance Optimization for Mobile
+ * Reduce number of visible bubbles on smaller screens
+ * and simplify effects for better performance
+ */
+@media (max-width: 768px) {
+  .bubble {
+    filter: blur(1px); /* Lighter blur for performance */
+    opacity: 0.1; /* Even more subtle on mobile */
+  }
+  
+  /* Hide some bubbles on mobile for performance */
+  .bubble:nth-child(n+10) {
+    display: none;
+  }
+}
+
+/**
+ * High Contrast Mode Support
+ * Hide decorative elements when high contrast is preferred
+ */
+@media (prefers-contrast: high) {
+  .bubblesContainer {
+    display: none;
+  }
+}

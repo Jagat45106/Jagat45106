@@ -1,0 +1,338 @@
+/**
+ * Skills Section Module CSS
+ * 
+ * Features:
+ * - Responsive grid layout for skill cards
+ * - Color-coded categories
+ * - Hover animations with lift effect
+ * - Technology badge styling
+ * - Staggered entrance animations
+ */
+
+.skills {
+  padding: var(--space-20) var(--space-4);
+  background-color: var(--color-bg-secondary);
+  position: relative;
+  transition: background-color var(--transition-normal);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-in-out;
+}
+
+.title.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tri-colour underline decoration */
+.title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-saffron) 0%,
+    var(--color-saffron) 33%,
+    var(--color-tri-white) 33%,
+    var(--color-tri-white) 66%,
+    var(--color-green-india) 66%,
+    var(--color-green-india) 100%
+  );
+  margin: var(--space-4) auto 0;
+  border-radius: var(--radius-full);
+}
+
+.subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-in-out 0.1s;
+}
+
+.subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/**
+ * Skills Grid
+ * Responsive grid: 1 column mobile, 2 tablet, 4 desktop
+ */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/**
+ * Skill Card Styles
+ * 
+ * Animation:
+ * - Fade in from bottom on scroll
+ * - Hover lifts card with enhanced shadow
+ * - Transition: 0.3s ease-in-out
+ */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  border-top: 4px solid transparent;
+  border: 1px solid var(--color-border);
+  border-top-width: 4px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all var(--transition-normal);
+}
+
+.card.visible {
+  animation: fadeInUp 0.5s ease-in-out forwards;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Dark mode card glow on hover */
+[data-theme="dark"] .card:hover {
+  box-shadow: var(--shadow-glow-sm);
+}
+
+/* Card hover animation keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Color variants for category cards */
+.card.blue {
+  border-top-color: var(--color-primary);
+}
+
+.card.green {
+  border-top-color: var(--color-secondary);
+}
+
+.card.orange {
+  border-top-color: var(--color-accent);
+}
+
+.card.purple {
+  border-top-color: #8b5cf6;
+}
+
+/* Card Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.categoryIcon {
+  font-size: var(--font-size-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  filter: drop-shadow(0 0 5px var(--glow-primary));
+}
+
+.categoryTitle {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* Skills List */
+.skillsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skillItem {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.skillItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.skillHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.skillIcon {
+  font-size: var(--font-size-base);
+  filter: drop-shadow(0 0 3px var(--glow-primary));
+}
+
+.skillName {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.skillDescription {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/**
+ * Technologies Section
+ * Badge-style tags for tools and technologies
+ */
+.technologies {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease-in-out 0.4s;
+}
+
+.technologies.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.techTitle {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+}
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+/**
+ * Technology Badges
+ * 
+ * Hover Effect:
+ * - Background color shift
+ * - Scale transform
+ * - Duration: 0.3s ease-in-out
+ */
+.techBadge {
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all var(--transition-normal);
+  cursor: default;
+}
+
+.techBadge:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}
+
+/* Dark mode tech badge glow */
+[data-theme="dark"] .techBadge:hover {
+  box-shadow: 0 0 15px var(--glow-primary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .skills {
+    padding: var(--space-16) var(--space-4);
+  }
+
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .categoryIcon {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .subtitle,
+  .card,
+  .technologies,
+  .techBadge {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card:hover,
+  .techBadge:hover {
+    transform: none;
+  }
+}
+
+/* Focus Styles for Accessibility */
+.card:focus-within {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}

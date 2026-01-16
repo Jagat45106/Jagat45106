@@ -1,0 +1,182 @@
+/**
+ * Theme Toggle Styles
+ * 
+ * GitHub-inspired theme toggle with glowing effects
+ */
+
+.toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.toggle:hover {
+  transform: scale(1.05);
+  border-color: var(--color-primary);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Light mode specific styles */
+.toggle.light {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-color: #fbbf24;
+  box-shadow: 
+    0 0 15px rgba(251, 191, 36, 0.4),
+    0 0 30px rgba(251, 191, 36, 0.2);
+}
+
+.toggle.light:hover {
+  box-shadow: 
+    0 0 20px rgba(251, 191, 36, 0.6),
+    0 0 40px rgba(251, 191, 36, 0.3);
+}
+
+/* Dark mode specific styles */
+.toggle.dark {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  border-color: var(--color-primary);
+  box-shadow: 
+    0 0 15px var(--glow-primary),
+    0 0 30px var(--glow-secondary);
+}
+
+.toggle.dark:hover {
+  box-shadow: 
+    0 0 25px var(--glow-primary),
+    0 0 50px var(--glow-secondary),
+    0 0 75px var(--glow-accent);
+}
+
+/* Icon wrapper */
+.iconWrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icons */
+.icon {
+  position: absolute;
+  font-size: 1.25rem;
+  transition: all var(--transition-normal);
+  opacity: 0;
+  transform: scale(0.5) rotate(-180deg);
+}
+
+.icon.visible {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.sunIcon {
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8));
+}
+
+.sunIcon.visible {
+  animation: sunPulse 3s ease-in-out infinite;
+}
+
+.moonIcon {
+  filter: drop-shadow(0 0 8px var(--glow-primary));
+}
+
+.moonIcon.visible {
+  animation: moonGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes sunPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8));
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(251, 191, 36, 1));
+    transform: scale(1.1) rotate(15deg);
+  }
+}
+
+@keyframes moonGlow {
+  0% {
+    filter: drop-shadow(0 0 8px var(--glow-primary))
+            drop-shadow(0 0 15px var(--glow-secondary));
+  }
+  100% {
+    filter: drop-shadow(0 0 12px var(--glow-secondary))
+            drop-shadow(0 0 25px var(--glow-primary));
+  }
+}
+
+/* Glow effect behind button */
+.glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-full);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-accent),
+    var(--color-primary)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: -1;
+  animation: glowRotate 4s linear infinite;
+}
+
+.toggle:hover .glow {
+  opacity: 0.5;
+}
+
+.toggle.dark .glow {
+  opacity: 0.3;
+}
+
+.toggle.dark:hover .glow {
+  opacity: 0.6;
+}
+
+@keyframes glowRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Placeholder for SSR */
+.iconPlaceholder {
+  font-size: 1.25rem;
+  opacity: 0.5;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .icon,
+  .sunIcon.visible,
+  .moonIcon.visible,
+  .glow {
+    animation: none;
+  }
+  
+  .toggle:hover {
+    transform: none;
+  }
+}

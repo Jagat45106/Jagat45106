@@ -1,0 +1,316 @@
+/**
+ * Footer Module CSS
+ * 
+ * Features:
+ * - Dark theme footer
+ * - Indian tri-colour accent bar
+ * - Responsive grid layout
+ * - Hover animations on links
+ */
+
+.footer {
+  background-color: #111827;
+  color: #d1d5db;
+  position: relative;
+  transition: background-color var(--transition-normal);
+}
+
+/* Dark mode footer - slightly different shade */
+[data-theme="dark"] .footer {
+  background-color: #0a0f18;
+  border-top: 1px solid var(--color-border);
+}
+
+/**
+ * Tri-colour Accent Bar
+ * Decorative element at top of footer
+ */
+.accentBar {
+  display: flex;
+  height: 4px;
+}
+
+.accentSaffron {
+  flex: 1;
+  background-color: var(--color-saffron);
+}
+
+.accentWhite {
+  flex: 1;
+  background-color: var(--color-tri-white);
+}
+
+.accentGreen {
+  flex: 1;
+  background-color: var(--color-green-india);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-4);
+}
+
+/**
+ * Content Grid
+ * Three columns: brand, navigation, social
+ */
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-gray-800);
+}
+
+@media (min-width: 640px) {
+  .content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .content {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+/* Brand Section */
+.brand {
+  margin-bottom: var(--space-4);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-white);
+  text-decoration: none;
+  margin-bottom: var(--space-3);
+  transition: opacity var(--transition-normal);
+}
+
+.logo:hover {
+  opacity: 0.9;
+}
+
+.logoIcon {
+  font-size: var(--font-size-2xl);
+}
+
+.logoText {
+  background: linear-gradient(
+    135deg,
+    var(--color-saffron) 0%,
+    var(--color-tri-white) 50%,
+    var(--color-green-india) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(255, 153, 51, 0.5));
+}
+
+/* Enhanced glow in dark mode */
+[data-theme="dark"] .logoText {
+  filter: drop-shadow(0 0 15px rgba(255, 153, 51, 0.6))
+          drop-shadow(0 0 30px rgba(19, 136, 8, 0.4));
+}
+
+.logoIcon {
+  filter: drop-shadow(0 0 6px var(--glow-primary));
+}
+
+[data-theme="dark"] .logoIcon {
+  filter: drop-shadow(0 0 10px var(--glow-primary))
+          drop-shadow(0 0 20px var(--glow-secondary));
+}
+
+.tagline {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-400);
+  margin: 0;
+  max-width: 300px;
+}
+
+/* Navigation Section */
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.navTitle {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-4);
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navList li {
+  margin-bottom: var(--space-2);
+}
+
+/**
+ * Navigation Link Hover Effect
+ * 
+ * - Underline slides in from left
+ * - Color brightens
+ * - Transition: 0.3s ease-in-out
+ */
+.navLink {
+  position: relative;
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-400);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+  padding-bottom: 2px;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-primary-light);
+  transition: width var(--transition-normal);
+}
+
+.navLink:hover {
+  color: var(--color-white);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* Social Section */
+.social {
+  display: flex;
+  flex-direction: column;
+}
+
+.socialList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/**
+ * Social Link Styles
+ * 
+ * Hover Effect:
+ * - Background color change
+ * - Icon scale increase
+ * - Transition: 0.3s ease-in-out
+ */
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-400);
+  text-decoration: none;
+  transition: color var(--transition-normal);
+}
+
+.socialLink:hover {
+  color: var(--color-white);
+}
+
+.socialLink:hover .socialIcon {
+  transform: scale(1.1);
+  color: var(--color-primary-light);
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  transition: all var(--transition-normal);
+}
+
+.socialName {
+  font-weight: 500;
+}
+
+/**
+ * Bottom Bar
+ * Copyright and credits
+ */
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-6);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.copyright {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+.credits {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  margin: 0;
+}
+
+/* Visually Hidden (for screen readers) */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus Styles */
+.logo:focus-visible,
+.navLink:focus-visible,
+.socialLink:focus-visible {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .navLink::after,
+  .socialLink,
+  .socialIcon,
+  .logo {
+    transition: none;
+  }
+
+  .socialLink:hover .socialIcon {
+    transform: none;
+  }
+}

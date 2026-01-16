@@ -1,0 +1,366 @@
+/**
+ * Header Module CSS
+ * 
+ * Styles for the main navigation header
+ * 
+ * Features:
+ * - Fixed positioning with backdrop blur
+ * - Responsive design with mobile hamburger menu
+ * - Smooth hover and transition effects
+ * - Accessible focus states
+ */
+
+/* Main Header Container */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-fixed);
+  padding: var(--space-4) 0;
+  background-color: transparent;
+  transition: all var(--transition-normal);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Scrolled State - adds background */
+.header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Dark mode scrolled state */
+[data-theme="dark"] .header.scrolled {
+  background-color: rgba(13, 17, 23, 0.95);
+  box-shadow: 0 1px 0 var(--color-border), var(--shadow-glow-sm);
+}
+
+/* Inner Container */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* Right side controls container */
+.rightControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: transform var(--transition-normal);
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.logoIcon {
+  font-size: var(--font-size-2xl);
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.5));
+  animation: iconGlowHeader 2s ease-in-out infinite alternate;
+}
+
+@keyframes iconGlowHeader {
+  0% {
+    filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.6));
+  }
+}
+
+.logoText {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.5))
+          drop-shadow(0 0 15px rgba(34, 197, 94, 0.3));
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  0% {
+    filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.5))
+            drop-shadow(0 0 15px rgba(34, 197, 94, 0.3));
+  }
+  100% {
+    filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.6))
+            drop-shadow(0 0 20px rgba(37, 99, 235, 0.4));
+  }
+}
+
+/* Desktop Navigation */
+.desktopNav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopNav {
+    display: block;
+  }
+}
+
+.navList {
+  display: flex;
+  gap: var(--space-8);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Navigation Link Styles
+ * 
+ * Hover Effect:
+ * - Underline slides in from left
+ * - Color transition to primary
+ * - Duration: 0.3s ease-in-out
+ */
+.navLink {
+  position: relative;
+  color: var(--color-gray-700);
+  font-weight: 500;
+  text-decoration: none;
+  padding: var(--space-2) 0;
+  transition: color var(--transition-normal);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--color-saffron),
+    var(--color-green-india)
+  );
+  transition: width var(--transition-normal);
+}
+
+.navLink:hover {
+  color: var(--color-primary);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.navLink:focus {
+  outline: none;
+}
+
+.navLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+/* Mobile Menu Toggle Button */
+.menuToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: calc(var(--z-fixed) + 1);
+}
+
+@media (min-width: 768px) {
+  .menuToggle {
+    display: none;
+  }
+}
+
+/**
+ * Hamburger Menu Animation
+ * 
+ * Transforms from hamburger to X on open:
+ * - Top bar rotates 45deg
+ * - Middle bar fades out
+ * - Bottom bar rotates -45deg
+ */
+.menuBar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-gray-800);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+  transform-origin: center;
+}
+
+.menuOpen .menuBar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menuOpen .menuBar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menuOpen .menuBar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile Navigation Overlay (backdrop) */
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  z-index: var(--z-fixed);
+}
+
+.overlayVisible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/**
+ * Mobile Navigation Panel
+ * 
+ * Slide-in from right animation:
+ * - Transform from translateX(100%) to translateX(0)
+ * - Duration: 0.3s ease-in-out
+ */
+.mobileNav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 80vw;
+  background-color: var(--color-white);
+  padding: var(--space-20) var(--space-6) var(--space-6);
+  transform: translateX(100%);
+  transition: transform var(--transition-normal);
+  z-index: calc(var(--z-fixed) + 1);
+  box-shadow: var(--shadow-xl);
+}
+
+.mobileNavOpen {
+  transform: translateX(0);
+}
+
+.mobileNavList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Mobile Navigation Item Animation
+ * 
+ * Staggered fade-in effect:
+ * - Each item fades in with delay
+ * - Delay increases by 0.1s per item
+ * - Creates cascading appearance effect
+ */
+.mobileNavItem {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.mobileNavOpen .mobileNavItem {
+  animation: slideInRight 0.3s ease-in-out forwards;
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobileNavLink {
+  display: block;
+  padding: var(--space-4) 0;
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-gray-800);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-gray-100);
+  transition: all var(--transition-normal);
+}
+
+.mobileNavLink:hover {
+  color: var(--color-primary);
+  padding-left: var(--space-2);
+}
+
+.mobileNavLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Fade In Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .navLink::after,
+  .menuBar,
+  .mobileOverlay,
+  .mobileNav,
+  .mobileNavItem,
+  .mobileNavLink,
+  .logoText,
+  .logoIcon {
+    transition: none;
+    animation: none;
+  }
+  
+  .mobileNavOpen .mobileNavItem {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .logoText {
+    filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.4));
+  }
+  
+  .logoIcon {
+    filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.4));
+  }
+}
